@@ -1,0 +1,785 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Vicent ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #18000b;
+    color: white;
+    overflow-x: hidden;
+}
+
+button { cursor: pointer; }
+
+/* CONTRASEÑA */
+
+#inicio {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    transition: 1s;
+}
+
+.login { width: 100%; max-width: 380px; }
+
+.login .heart { font-size: 75px; animation: latido 1s infinite; }
+
+.login h1 {
+    font-family: 'Great Vibes';
+    font-size: 48px;
+    color: #ff78a8;
+    margin: 20px;
+}
+
+.login p { color: #ffc5d9; margin-bottom: 20px; }
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ed477b;
+    border-radius: 30px;
+    background: #200b13;
+    color: white;
+    text-align: center;
+    outline: none;
+}
+
+.boton {
+    border: none;
+    padding: 14px 27px;
+    border-radius: 30px;
+    background: linear-gradient(45deg,#ed174f,#ff8ab4);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 20px #ff367777;
+    transition: .3s;
+    margin-top: 20px;
+}
+
+.boton:hover { transform: scale(1.08); }
+
+#error { color: #ff8eb4; margin-top: 15px; }
+
+/* SOBRE */
+
+#sobrePantalla {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: radial-gradient(circle,#7c1641,#21000d);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+}
+
+#sobrePantalla h2 {
+    font-family: 'Great Vibes';
+    color: #ffc0d5;
+    font-size: 48px;
+    margin-bottom: 25px;
+}
+
+.sobre {
+    position: relative;
+    width: 270px;
+    height: 180px;
+    background: #ffb5ce;
+    border-radius: 8px;
+    box-shadow: 0 15px 45px #0008;
+    cursor: pointer;
+    perspective: 700px;
+}
+
+.sobre:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #f78eae;
+    clip-path: polygon(0 0,50% 55%,100% 0);
+    z-index: 3;
+    transform-origin: top;
+    transition: transform 1s;
+}
+
+.sobre:after {
+    content: "❤️";
+    position: absolute;
+    top: 65px;
+    left: 115px;
+    font-size: 40px;
+    z-index: 4;
+}
+
+.sobre.abierto:before {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.sobre.abierto:after { opacity: 0; }
+
+.mensajeSobre {
+    color: #ffe3ed;
+    margin: 25px;
+}
+
+/* PAGINA */
+
+#contenido {
+    display: none;
+    background:
+    radial-gradient(ellipse at top,#8c174b,transparent 65%),
+    linear-gradient(145deg,#27000e,#650c31,#22000d);
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+header {
+    text-align: center;
+    padding: 65px 15px 35px;
+}
+
+header .mini {
+    letter-spacing: 5px;
+    font-size: 11px;
+    color: #ffc1d8;
+}
+
+header h1 {
+    font-family: 'Great Vibes';
+    font-size: clamp(65px,12vw,120px);
+    color: #ffb3ce;
+    text-shadow: 0 0 30px #ff367b;
+    margin: 25px 0;
+}
+
+header p { color: #ffe2ed; }
+
+.seccion {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 35px 22px;
+    border: 1px solid #ff9dbb55;
+    background: #ffffff0d;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 10px 35px #0004;
+}
+
+.seccion h2 {
+    font-family: 'Great Vibes';
+    font-size: 46px;
+    color: #ff9dbd;
+    margin-bottom: 22px;
+}
+
+.seccion p {
+    line-height: 2;
+    color: #ffe4ed;
+    font-size: 14px;
+}
+
+/* CARTA */
+
+.carta {
+    background: linear-gradient(135deg,#fff0f5,#ffd1e0);
+    color: #9a194b;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: left;
+    box-shadow: 0 10px 30px #0004;
+}
+
+.carta h3 {
+    font-family: 'Great Vibes';
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #c21c58;
+}
+
+.carta p { color: #761337; line-height: 2; }
+
+.firma {
+    font-family: 'Great Vibes';
+    font-size: 30px !important;
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* CONTADOR */
+
+.contador {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.numero {
+    padding: 20px 8px;
+    border-radius: 15px;
+    background: #ff8db31c;
+    border: 1px solid #ff9cbd55;
+}
+
+.numero strong {
+    display: block;
+    font-size: 30px;
+    color: #ffb1cd;
+}
+
+.numero span {
+    font-size: 11px;
+    color: #ffe0eb;
+}
+
+.fecha {
+    color: #ffc2d8;
+    margin-top: 20px;
+}
+
+/* BOTON CORAZONES */
+
+#corazonesBtn {
+    font-size: 16px;
+    margin-top: 25px;
+}
+
+.explosion {
+    position: fixed;
+    pointer-events: none;
+    z-index: 200;
+    animation: explosion 2s forwards;
+}
+
+@keyframes explosion {
+    0% { transform: translate(0,0) scale(.5); opacity: 1; }
+    100% { transform: translate(var(--x),var(--y)) rotate(360deg) scale(1.5); opacity: 0; }
+}
+
+/* MUSICA */
+
+.music {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 50;
+    border: 1px solid #ffbad0;
+    background: #a3194d;
+    color: white;
+    border-radius: 50px;
+    padding: 13px 18px;
+    box-shadow: 0 0 20px #ff4c8866;
+}
+
+/* DECORACION */
+
+.decoracion {
+    font-size: 30px;
+    margin: 25px;
+}
+
+.final {
+    text-align: center;
+    padding: 65px 15px;
+}
+
+.final h2 {
+    font-family: 'Great Vibes';
+    color: #ffb5ce;
+    font-size: 65px;
+    text-shadow: 0 0 20px #ff367b;
+}
+
+.final p { margin: 20px; color: #ffe2ed; }
+
+footer {
+    text-align: center;
+    color: #ffacc9;
+    padding: 25px;
+    font-size: 11px;
+}
+
+@keyframes latido {
+    50% { transform: scale(1.2); }
+}
+
+@keyframes flotar {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.flotante {
+    position: fixed;
+    bottom: -40px;
+    z-index: 2;
+    pointer-events: none;
+    animation: flotar 7s linear forwards;
+}
+
+@media(max-width:500px) {
+    .carta { padding: 20px; }
+    .seccion { padding: 25px 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PANTALLA NEGRA -->
+
+<div id="inicio">
+    <div class="login">
+        <div class="heart">❤️</div>
+        <h1>Una sorpresa para ti...</h1>
+        <p>Solo una persona puede abrir este pequeño regalo.</p>
+
+        <input type="password" id="password"
+        placeholder="Nuestra contraseña..."
+        onkeydown="if(event.key==='Enter') entrar()">
+
+        <button class="boton" onclick="entrar()">
+            ABRIR MI REGALO 💌
+        </button>
+
+        <div id="error"></div>
+    </div>
+</div>
+
+<!-- SOBRE ANIMADO -->
+
+<div id="sobrePantalla">
+    <h2>Una cartita para mi cariño</h2>
+
+    <div class="sobre" id="sobre" onclick="abrirSobre()"></div>
+
+    <p class="mensajeSobre" id="mensajeSobre">
+        Pulsa el sobre para descubrir tu sorpresa ❤️
+    </p>
+
+    <button class="boton" id="abrirBtn" onclick="abrirSobre()">
+        ABRIR MI CARTITA 💗
+    </button>
+</div>
+
+<!-- PAGINA PRINCIPAL -->
+
+<div id="contenido">
+
+<header>
+    <div class="mini">HECHO CON TODO MI AMOR</div>
+    <div class="decoracion">🌹 🎀 💗 🎀 🌹</div>
+
+    <h1>TE QUIERO GUAPO</h1>
+
+    <p>Una página pequeñita para una persona enorme en mi corazón.</p>
+
+    <div class="decoracion">♡ ∞ ♡</div>
+</header>
+
+<!-- PRESENTACION -->
+
+<section class="seccion">
+    <h2>Hola cariñooooo 💕</h2>
+
+    <p>
+        Si estás viendo esto es porque eres tú,
+        la persona a la que quiero dedicarle
+        cada palabra de esta página.
+
+        <br><br>
+
+        He preparado esta sorpresa para recordarte
+        lo importante que eres para mí.
+
+        Espero que sonrías mucho al verla,
+        porque está hecha pensando en ti.
+    </p>
+
+    <div class="decoracion">💗 🌷 💗</div>
+</section>
+
+<!-- CARTA -->
+
+<section class="seccion">
+    <h2>Una carta para ti 💌</h2>
+
+    <div class="carta">
+        <h3>Para el mas guapo del mundo</h3>
+
+        <p>
+            cariño:
+
+            <br><br>
+
+            No sé ni por dónde empezar para explicarte
+            todo lo que significas para mí.
+
+            Me encanta tenerte en mi vida,
+            poder hablar contigo, reírme contigo
+            y compartir tantos momentos.
+
+            <br><br>
+
+            Desde aquel 29 de noviembre de 2023
+            que me empezaste a hablar todo cambio.
+
+            <br><br>
+
+            Gracias por ser tú, por cada sonrisa,
+            por cada abrazo y por cada beso.
+        
+
+            <br><br>
+
+            Si tuviera que volver a empezar,
+            me encantaría volver a encontrarte.
+
+            Quiero seguir creando recuerdos contigo,
+            vivir aventuras, reírnos de tonterías
+            y disfrutar de todos los momentos
+            que todavía nos quedan.
+
+            <br><br>
+
+            Nunca dudes de lo muchísimo que te quiero.
+            
+
+        </p>
+
+        <p class="firma">Te quiero❤️</p>
+    </div>
+</section>
+
+<!-- CONTADOR -->
+
+<section class="seccion">
+    <h2>Desde que comenzó nuestra historia ♾️</h2>
+
+    <p>
+        Desde aquel 29 de noviembre de 2023
+        hasta este mismo instante...
+    </p>
+
+    <div class="contador">
+
+        <div class="numero">
+            <strong id="dias">0</strong>
+            <span>DÍAS</span>
+        </div>
+
+        <div class="numero">
+            <strong id="horas">0</strong>
+            <span>HORAS</span>
+        </div>
+
+        <div class="numero">
+            <strong id="minutos">0</strong>
+            <span>MINUTOS</span>
+        </div>
+
+        <div class="numero">
+            <strong id="segundos">0</strong>
+            <span>SEGUNDOS</span>
+        </div>
+
+    </div>
+
+    <div class="fecha">
+        ❤️ 29 · 11 · 2023 ❤️
+        <br>
+        El comienzo de nuestra historia.
+    </div>
+</section>
+
+<!-- BOTON ESPECIAL -->
+
+<section class="seccion">
+    <h2>Una preguntita... 🥺</h2>
+
+    <p>
+        ¿Sabes cuánto te quiero?
+        <br>
+        Pues pulsa el botón y te lo intento demostrar.
+    </p>
+
+    <button class="boton" id="corazonesBtn"
+    onclick="explosionAmor()">
+        PULSA AQUÍ SI ME QUIERES 💗
+    </button>
+
+    <div id="respuesta" style="margin-top:25px;color:#ffb4d0;font-size:20px;">
+    </div>
+</section>
+
+<!-- RAZONES -->
+
+<section class="seccion">
+    <h2>Mis razones para quererte 🌹</h2>
+
+    <p>
+        ♡ Porque me haces feliz.
+        <br><br>
+        ♡ Porque tus abrazos son mi lugar favorito.
+        <br><br>
+        ♡ Porque me encanta tu sonrisa.
+        <br><br>
+        ♡ Porque contigo todo es más bonito.
+        <br><br>
+        ♡ Porque eres mi persona especial.
+        <br><br>
+        ♡ Porque no necesito que seas perfecto,
+        solo quiero que seas tú.
+        <br><br>
+        ♡ Porque te elegiría una y mil veces.
+    </p>
+
+    <div class="decoracion">💋 💞 💋</div>
+</section>
+
+<!-- FINAL -->
+
+<div class="final">
+    <div style="font-size:55px">💗</div>
+
+    <h2>Te elegiría mil veces</h2>
+
+    <p>
+        Hoy, mañana y siempre.
+        <br>
+    
+
+    <div class="decoracion">🌹 💗 ♾️ 💗 🌹</div>
+
+    <h2>TE QUIERO GUAPO</h2>
+
+    <p>Con muchísimo amor, para Vicent. ❤️</p>
+</div>
+
+<footer>
+    Hecho con amor para la persona más especial.
+    <br>
+    29 · 11 · 2023 ♡
+</footer>
+
+</div>
+
+<!-- BOTON MUSICA -->
+
+<button class="music" id="musicBtn"
+onclick="musica()">
+    🎵 Activar música
+</button>
+
+<audio id="cancion" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+// CONTRASEÑA
+
+function entrar() {
+    const clave = document.getElementById("password").value;
+
+    if (clave === "andreeayvicent") {
+
+        document.getElementById("inicio").style.display = "none";
+
+        document.getElementById("sobrePantalla").style.display = "flex";
+
+    } else {
+        document.getElementById("error").innerText =
+        "Contraseña incorrecta, mi amorcito 💔";
+    }
+}
+
+// ABRIR SOBRE
+
+let abierto = false;
+
+function abrirSobre() {
+
+    if (abierto) return;
+
+    abierto = true;
+
+    document.getElementById("sobre").classList.add("abierto");
+
+    document.getElementById("mensajeSobre").innerText =
+    "¡SORPRESA ❤️";
+
+    document.getElementById("abrirBtn").innerText =
+    "ENTRAR A MI REGALO 💗";
+
+    document.getElementById("abrirBtn").onclick = mostrarPagina;
+
+}
+
+function mostrarPagina() {
+
+    document.getElementById("sobrePantalla").style.display = "none";
+
+    document.getElementById("contenido").style.display = "block";
+
+    window.scrollTo(0,0);
+
+    corazonesFlotantes();
+}
+
+// CONTADOR DESDE EL 29/11/2023
+
+function actualizarContador() {
+
+    const inicio = new Date(2023, 10, 29, 0, 0, 0);
+
+    const ahora = new Date();
+
+    let diferencia = Math.max(0, ahora - inicio);
+
+    const dias = Math.floor(diferencia / 86400000);
+
+    const horas = Math.floor((diferencia % 86400000) / 3600000);
+
+    const minutos = Math.floor((diferencia % 3600000) / 60000);
+
+    const segundos = Math.floor((diferencia % 60000) / 1000);
+
+    document.getElementById("dias").innerText = dias;
+
+    document.getElementById("horas").innerText = horas;
+
+    document.getElementById("minutos").innerText = minutos;
+
+    document.getElementById("segundos").innerText = segundos;
+}
+
+actualizarContador();
+
+setInterval(actualizarContador,1000);
+
+// EXPLOSION DE CORAZONES
+
+function explosionAmor() {
+
+    const simbolos = ["❤️","💕","💗","💖","💘","💋","🌹","✨"];
+
+    for(let i=0; i<65; i++) {
+
+        const elemento = document.createElement("div");
+
+        elemento.className = "explosion";
+
+        elemento.innerText =
+        simbolos[Math.floor(Math.random()*simbolos.length)];
+
+        elemento.style.left = "50%";
+
+        elemento.style.top = "50%";
+
+        elemento.style.fontSize =
+        (20 + Math.random()*25) + "px";
+
+        elemento.style.setProperty("--x",
+        (Math.random()-0.5)*window.innerWidth*1.5 + "px");
+
+        elemento.style.setProperty("--y",
+        (Math.random()-0.5)*window.innerHeight*1.5 + "px");
+
+        document.body.appendChild(elemento);
+
+        setTimeout(()=>elemento.remove(),2000);
+    }
+
+    document.getElementById("respuesta").innerText =
+    "¡YO TE QUIERO MUCHÍSIMO MÁS, GUAPO! ❤️";
+}
+
+// CORAZONES FLOTANTES
+
+function corazonesFlotantes() {
+
+    const simbolos = ["❤️","💕","💗","💖","🌹","💞","✨"];
+
+    setInterval(()=>{
+
+        const elemento = document.createElement("div");
+
+        elemento.className = "flotante";
+
+        elemento.innerText =
+        simbolos[Math.floor(Math.random()*simbolos.length)];
+
+        elemento.style.left = Math.random()*100+"vw";
+
+        elemento.style.fontSize =
+        (15+Math.random()*25)+"px";
+
+        document.body.appendChild(elemento);
+
+        setTimeout(()=>elemento.remove(),7000);
+
+    },500);
+}
+
+// MUSICA
+
+let reproduciendo = false;
+
+function musica() {
+
+    const audio = document.getElementById("cancion");
+
+    const boton = document.getElementById("musicBtn");
+
+    if(!reproduciendo) {
+
+        audio.play().then(()=>{
+
+            reproduciendo = true;
+
+            boton.innerText = "⏸ Pausar música";
+
+        }).catch(()=>{
+
+            boton.innerText = "No se pudo reproducir 🎵";
+
+        });
+
+    } else {
+
+        audio.pause();
+
+        reproduciendo = false;
+
+        boton.innerText = "🎵 Activar música";
+
+    }
+}
+
+</script>
+
+</body>
+</html>
+```
